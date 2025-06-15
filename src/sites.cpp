@@ -18,8 +18,10 @@
         MercadoLivre::nomeSite = "Mercado Livre";
         MercadoLivre::baseUrlSite = "https://lista.mercadolivre.com.br/";
     }
-    void setBaseUrl(const std::string& nome, const std::string& baseUrl) override {
-        // Implementação específica para OLX, se necessário
+    void setBaseUrl(std::string searchTerm) override {
+        std::string formattedSearchTerm = searchTerm;
+        std::replace(formattedSearchTerm.begin(), formattedSearchTerm.end(), ' ', '-');
+        MercadoLivre::baseUrlSite += formattedSearchTerm;
     }
    
     // Olx class implementation
@@ -27,8 +29,8 @@
         Olx::nomeSite = "OLX";
         Olx::baseUrlSite = "https://www.olx.com.br/brasil";
     }
-    void setBaseUrl(const std::string& nome, const std::string& baseUrl) override {
-        // Implementação específica para OLX, se necessário
+    void setBaseUrl(std::string searchTerm) override {
+        Olx::baseUrlSite += "?q=" + searchTerm;
     }
 
     // Amazon class implementation
@@ -36,8 +38,8 @@
         Amazon::nomeSite = "Amazon";
         Amazon::baseUrlSite = "https://www.amazon.com.br/s";
     }
-    void setBaseUrl(const std::string& nome, const std::string& baseUrl) override {
-        // Implementação específica para OLX, se necessário
+    void setBaseUrl(std::string searchTerm) override {
+        Amazon::baseUrlSite  += "?k=" + searchTerm;
     }
 
 
